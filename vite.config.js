@@ -27,12 +27,22 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  server: {
+    proxy: {
+      '/dev-api': {
+        target: 'http://pcapi-xiaotuxian-front-devtest.itheima.net',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/dev-api/, ''),
+      },
+    },
+  },
   css: {
     preprocessorOptions: {
       scss: {
         // 自动导入定制化样式文件进行样式覆盖
         additionalData: `
           @use "@/styles/element_theme/index.scss" as *;
+          @use "@/styles/var.scss" as *;
         `,
       }
     }
