@@ -1,0 +1,37 @@
+{
+  "id": "5254435",
+  "name": "vue-rabbit",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "2076258",
+      "name": "客服",
+      "font_class": "kefu",
+      "unicode": "e88f",
+      "unicode_decimal": 59535
+    },
+    {
+      "icon_id": "5532887",
+      "name": "公众号",
+      "font_class": "gongzhonghao",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "6556877",
+      "name": "微博",
+      "font_class": "weibo",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
+      "icon_id": "12692717",
+      "name": "问题反馈",
+      "font_class": "wentifankui",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    }
+  ]
+}

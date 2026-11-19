@@ -3,6 +3,8 @@ import { createPinia } from 'pinia'
 import { getCotegray } from '@/api/test.js'
 import App from './App.vue'
 import router from './router'
+import '@/styles/common.scss'
+import '@/assets/icons/iconfont.css'
 
 const app = createApp(App)
 
