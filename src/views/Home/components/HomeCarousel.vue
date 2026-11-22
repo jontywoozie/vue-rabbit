@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-  import { getCarouselAPI } from '@/api/getCarouselAPI';
+  import { getCarouselAPI } from '@/api/home';
   import { onMounted, ref } from 'vue';
 
   let imageList = ref([])
