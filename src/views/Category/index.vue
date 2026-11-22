@@ -6,4 +6,8 @@
 
 </script>
 
-<style scoped></style>
+<style scoped>
+  div {
+    height: 1200px;
+  }
+</style>

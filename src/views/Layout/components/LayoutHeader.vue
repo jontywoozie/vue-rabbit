@@ -4,16 +4,17 @@
       <li class="header_item">
         <img class="logoImage" src="@/assets/images/logo.png" alt="小兔鲜">
       </li>
-      <li class="header_item"><a href="#">首页</a></li>
-      <li class="header_item"><a href="#">居家</a></li>
-      <li class="header_item"><a href="#">美食</a></li>
+      <li class="header_item" v-for="item in categoryStore.data" :key="item.id"><a href="#">{{ item.name }}</a>
+      </li>
+      <!-- <li class="header_item"><a href="#">居家</a></li> -->
+      <!-- <li class="header_item"><a href="#">美食</a></li>
       <li class="header_item"><a href="#">服饰</a></li>
       <li class="header_item"><a href="#">母婴</a></li>
       <li class="header_item"><a href="#">个护</a></li>
       <li class="header_item"><a href="#">严选</a></li>
       <li class="header_item"><a href="#">数码</a></li>
       <li class="header_item"><a href="#">运动</a></li>
-      <li class="header_item"><a href="#">杂项</a></li>
+      <li class="header_item"><a href="#">杂项</a></li> -->
       <li class="header_item">
         <el-input v-model="input4" class="responsive-input" placeholder="Type something">
           <template #prefix>
@@ -28,7 +29,8 @@
 </template>
 
 <script setup>
-
+  import { useCategoryStore } from '@/stores/category';
+  const categoryStore = useCategoryStore()
 </script>
 
 <style scoped lang="scss">
