@@ -17,7 +17,6 @@
   let imageList = ref([])
   onMounted(async () => {
     imageList.value = await (await getCarouselAPI()).data.result
-    console.log(imageList.value)
   })
 
 </script>
