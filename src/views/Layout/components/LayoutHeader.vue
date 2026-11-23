@@ -4,7 +4,8 @@
       <li class="header_item">
         <img class="logoImage" src="@/assets/images/logo.png" alt="小兔鲜">
       </li>
-      <li class="header_item" v-for="item in categoryStore.data" :key="item.id"><a href="#">{{ item.name }}</a>
+      <li class="header_item" v-for="item in categoryStore.data" :key="item.id">
+        <RouterLink :to="`/category/${item.id}`">{{ item.name }}</RouterLink>
       </li>
       <!-- <li class="header_item"><a href="#">居家</a></li> -->
       <!-- <li class="header_item"><a href="#">美食</a></li>

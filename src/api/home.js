@@ -28,3 +28,9 @@ export function getHomeGoodsAPI() {
     url: '/home/goods'
   })
 }
+
+export function getHomeCategoryAPI() {
+  return httpInstance({
+    url: '/home/category/head'
+  })
+}

@@ -1,9 +1,10 @@
 import httpInstance from "@/utils/axiosInstance";
 
-export function getCategoryAPI() {
+export function getCategoryAPI(id) {
   return httpInstance(
     {
-      url: '/home/category/head'
+      url: '/category',
+      params: { id }
     }
   )
 }
