@@ -1,13 +1,8 @@
 <script setup>
-  import { onMounted, ref } from 'vue';
   import HomePanel from './HomePanel.vue'
   import GoodsItems from './GoodsItems.vue';
-  import { getHomeGoodsAPI } from '@/api/home.js';
-  let goodsProduct = ref([])
-  onMounted(async () => {
-    goodsProduct.value = await (await getHomeGoodsAPI()).data.result
-    console.log(goodsProduct.value)
-  })
+  import { useHomeGoods } from '../composables/useHomeGoods.js';
+  const { goodsProduct } = useHomeGoods()
 </script>
 
 <template>

@@ -1,16 +1,7 @@
 <script setup>
   import HomePanel from './HomePanel.vue'
-  import { getHotAPI } from '@/api/home.js'
-  import { onMounted, ref } from 'vue'
-  const hotList = ref([])
-  const getHotList = async () => {
-    const res = await getHotAPI()
-    hotList.value = res.data.result
-  }
-  onMounted(() => {
-    getHotList()
-  })
-
+  import { useHotGoods } from '../composables/useHotGoods.js'
+  const { hotList } = useHotGoods()
 </script>
 
 <template>

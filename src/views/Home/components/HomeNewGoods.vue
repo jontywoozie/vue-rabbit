@@ -1,11 +1,7 @@
 <script setup>
   import HomePanel from './HomePanel.vue';
-  import { onMounted, ref } from 'vue';
-  import { getHomeNewAPI } from '@/api/home.js';
-  let newList = ref([])
-  onMounted(async () => {
-    newList.value = (await getHomeNewAPI()).data.result
-  })
+  import { useNewGoods } from '../composables/useNewGoods.js';
+  const { newList } = useNewGoods()
 </script>
 
 <template>

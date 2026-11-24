@@ -11,14 +11,8 @@
 </template>
 
 <script setup>
-  import { getCarouselAPI } from '@/api/home';
-  import { onMounted, ref } from 'vue';
-
-  let imageList = ref([])
-  onMounted(async () => {
-    imageList.value = await (await getCarouselAPI()).data.result
-  })
-
+  import { useCarousel } from '../composables/useCarousel.js';
+  const { imageList } = useCarousel()
 </script>
 
 <style scoped lang="scss">

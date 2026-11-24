@@ -1,18 +1,9 @@
 <script setup>
-  import { getCategoryAPI, getCategoryBannerAPI } from '@/api/category';
-  import { onMounted, ref, watch } from 'vue';
-  import { useRoute } from 'vue-router';
   import GoodsItems from '../Home/components/GoodsItems.vue';
-  let route = useRoute()
-  const resCategoryObj = ref({})
-  const resbannerList = ref([])
-  watch(() => route.params.id, async () => {
-    resCategoryObj.value = (await getCategoryAPI(route.params.id)).data.result
-    console.log(resCategoryObj.value)
-  }, { immediate: true })
-  onMounted(async () => {
-    resbannerList.value = (await getCategoryBannerAPI('2')).data.result
-  })
+  import { useBanner } from './composables/useBanner.js';
+  import { useCategory } from './composables/useCategory.js';
+  const { resCategoryObj } = useCategory()
+  const { resbannerList } = useBanner()
 </script>
 
 <template>
