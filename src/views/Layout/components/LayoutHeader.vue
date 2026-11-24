@@ -5,7 +5,7 @@
         <img class="logoImage" src="@/assets/images/logo.png" alt="小兔鲜">
       </li>
       <li class="header_item" v-for="item in categoryStore.data" :key="item.id">
-        <RouterLink :to="`/category/${item.id}`">{{ item.name }}</RouterLink>
+        <RouterLink active-class="active" :to="`/category/${item.id}`">{{ item.name }}</RouterLink>
       </li>
       <!-- <li class="header_item"><a href="#">居家</a></li> -->
       <!-- <li class="header_item"><a href="#">美食</a></li>
@@ -58,6 +58,11 @@
     width: 10rem;
     background-color: #fefefe;
     ;
+  }
+
+  .header_item a.active {
+    color: $xtxColor;
+    border-bottom: 1px solid $xtxColor;
   }
 </style>
 <!-- <script setup>

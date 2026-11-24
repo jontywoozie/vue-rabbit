@@ -8,3 +8,10 @@ export function getCategoryAPI(id) {
     }
   )
 }
+
+export function getCategoryBannerAPI(distributionSite = '1') {
+  return httpInstance({
+    url: '/home/banner',
+    params: { distributionSite }
+  })
+}
