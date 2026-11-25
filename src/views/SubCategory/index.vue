@@ -1,12 +1,29 @@
 <script setup>
-  import { getCategoryFilterAPI } from '@/api/category';
+  import { getCategoryFilterAPI, getSubCategoryAPI } from '@/api/category';
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
+  import GoodsItems from '../Home/components/GoodsItems.vue';
   const resCategoryFilterObj = ref({})
   let route = useRoute()
+  const subCategoryList = ref([])
+  let data = ref({
+    categoryId: route.params.id,
+    page: 1,
+    pageSize: 20,
+    sortField: 'publishTime'
+  })
+  async function getSubGategory(data) {
+    subCategoryList.value = (await getSubCategoryAPI(data)).data.result.items
+  }
+  let tabChange = (name) => {
+    data.value.sortField = name
+    data.value.page = 1
+    getSubGategory(data.value)
+  }
   onMounted(async () => {
     resCategoryFilterObj.value = (await getCategoryFilterAPI(route.params.id)).data.result
     console.log(resCategoryFilterObj.value)
+    getSubGategory(data.value)
   })
 
 </script>
@@ -24,13 +41,16 @@
       </el-breadcrumb>
     </div>
     <div class="sub-container">
-      <el-tabs>
+      <el-tabs v-model="data.sortField" @tab-change="tabChange">
         <el-tab-pane label="最新商品" name="publishTime"></el-tab-pane>
         <el-tab-pane label="最高人气" name="orderNum"></el-tab-pane>
         <el-tab-pane label="评论最多" name="evaluateNum"></el-tab-pane>
       </el-tabs>
       <div class="body">
         <!-- 商品列表-->
+        <template v-for="item in subCategoryList" :key="item.id">
+          <goods-items :goods="item"></goods-items>
+        </template>
       </div>
     </div>
   </div>
