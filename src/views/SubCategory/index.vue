@@ -6,6 +6,7 @@
   const resCategoryFilterObj = ref({})
   let route = useRoute()
   const subCategoryList = ref([])
+  const stillScroll = ref(false)
   let data = ref({
     categoryId: route.params.id,
     page: 1,
@@ -15,10 +16,19 @@
   async function getSubGategory(data) {
     subCategoryList.value = (await getSubCategoryAPI(data)).data.result.items
   }
-  let tabChange = (name) => {
-    data.value.sortField = name
+  let tabChange = () => {
     data.value.page = 1
+    stillScroll.value = false
     getSubGategory(data.value)
+  }
+  let load = async () => {
+    data.value.page += 1
+    let newResList = (await getSubCategoryAPI(data.value)).data.result.items
+    if (newResList.length == 0) {
+      stillScroll.value = true
+    }
+    subCategoryList.value.push(...newResList)
+    console.log("到底了")
   }
   onMounted(async () => {
     resCategoryFilterObj.value = (await getCategoryFilterAPI(route.params.id)).data.result
@@ -46,7 +56,7 @@
         <el-tab-pane label="最高人气" name="orderNum"></el-tab-pane>
         <el-tab-pane label="评论最多" name="evaluateNum"></el-tab-pane>
       </el-tabs>
-      <div class="body">
+      <div class="body" v-infinite-scroll="load" :infinite-scroll-disabled="stillScroll">
         <!-- 商品列表-->
         <template v-for="item in subCategoryList" :key="item.id">
           <goods-items :goods="item"></goods-items>
