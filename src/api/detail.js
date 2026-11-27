@@ -6,3 +6,14 @@ export const getDetailAPI = (id) => {
     params: { id }
   })
 }
+
+export const getGoodsHotAPI = (id, type, limit = 3) => {
+  return httpInstance({
+    url: '/goods/hot',
+    params: {
+      id,
+      type,
+      limit
+    }
+  })
+}
