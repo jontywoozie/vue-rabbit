@@ -2,9 +2,7 @@
   import { getDetailAPI } from '@/api/detail';
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
-  import imgView from '@/components/imgView/index.vue'
   import GoodsHot from './components/GoodsHot.vue';
-  import xtxSku from '@/components/XtxSku/index.vue'
   const route = useRoute()
   const resDetailObj = ref({})
   const getDetail = async (id) => {
@@ -40,7 +38,7 @@
           <div class="goods-info">
             <div class="media" v-if="resDetailObj.salesCount">
               <!-- 图片预览区 -->
-              <img-view :imageList="resDetailObj.mainPictures"></img-view>
+              <XtxImgView :imageList="resDetailObj.mainPictures"></XtxImgView>
               <!-- 统计数量 -->
               <ul class="goods-sales">
                 <li>
