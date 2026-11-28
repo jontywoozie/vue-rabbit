@@ -1,6 +1,6 @@
 <script setup>
-  import { ref } from 'vue';
-
+  import { computed, ref, watch } from 'vue';
+  import { useMouseInElement } from '@vueuse/core'
   // 图片列表
   const imageList = [
     "https://yanxuan-item.nosdn.127.net/d917c92e663c5ed0bb577c7ded73e4ec.png",
@@ -9,10 +9,69 @@
     "https://yanxuan-item.nosdn.127.net/f93243224dc37674dfca5874fe089c60.jpg",
     "https://yanxuan-item.nosdn.127.net/f881cfe7de9a576aaeea6ee0d1d24823.jpg"
   ]
+  const target = ref(null)
+  const { elementX, elementY, isOutside } = useMouseInElement(target)
   const curImgIndex = ref(0)
   const handleMouseEnter = (i) => {
     curImgIndex.value = i
   }
+  // const curLayerLeft = computed(() => {
+  //   let left
+  //   if (elementX.value > 100 && elementX.value < 300) {
+  //     left = elementX.value - 100
+  //   } else if (elementX.value <= 100) {
+  //     left = 0
+  //   } else {
+  //     left = 200
+  //   }
+  //   return left
+  // })
+  // const curLayerTop = computed(() => {
+  //   let top
+  //   if (elementY.value > 100 && elementY.value < 300) {
+  //     top = elementY.value - 100
+  //   } else if (elementY.value <= 100) {
+  //     top = 0
+  //   } else {
+  //     top = 200
+  //   }
+  //   return top
+  // })
+
+  // const positionX = computed(() => {
+  //   return -2 * curLayerLeft.value
+  // })
+  // const positionY = computed(() => {
+  //   return -2 * curLayerTop.value
+  // })
+  const curLayerLeft = ref(0)
+  const curLayerTop = ref(0)
+  const positionX = ref(0)
+  const positionY = ref(0)
+
+  watch([elementX, elementY], () => {
+    if (isOutside.value) return
+    //处理跟随x
+    if (elementX.value > 100 && elementX.value < 300) {
+      curLayerLeft.value = elementX.value - 100
+    } else if (elementX.value <= 100) {
+      curLayerLeft.value = 0
+    } else {
+      curLayerLeft.value = 200
+    }
+    //处理跟随Y
+    if (elementY.value > 100 && elementY.value < 300) {
+      curLayerTop.value = elementY.value - 100
+    } else if (elementY.value <= 100) {
+      curLayerTop.value = 0
+    } else {
+      curLayerTop.value = 200
+    }
+    // 处理放大镜
+    positionX.value = -2 * curLayerLeft.value
+    positionY.value = -2 * curLayerTop.value
+  })
+
 </script>
 
 
@@ -22,7 +81,8 @@
     <div class="middle" ref="target">
       <img :src="imageList[curImgIndex]" alt="" />
       <!-- 蒙层小滑块 -->
-      <div class="layer" :style="{ left: `0px`, top: `0px` }"></div>
+      <div class="layer" v-show="!isOutside" :style="{ left: `${curLayerLeft}px`, top: `${curLayerTop}px` }">
+      </div>
     </div>
     <!-- 小图列表 -->
     <ul class="small">
@@ -34,11 +94,11 @@
     <!-- 放大镜大图 -->
     <div class="large" :style="[
       {
-        backgroundImage: `url(${imageList[0]})`,
-        backgroundPositionX: `0px`,
-        backgroundPositionY: `0px`,
+        backgroundImage: `url(${imageList[curImgIndex]})`,
+        backgroundPositionX: `${positionX}px`,
+        backgroundPositionY: `${positionY}px`,
       },
-    ]" v-show="false"></div>
+    ]" v-show="!isOutside"></div>
   </div>
 </template>
 
