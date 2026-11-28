@@ -37,7 +37,7 @@
           <div class="goods-info">
             <div class="media" v-if="resDetailObj.salesCount">
               <!-- 图片预览区 -->
-              <img-view></img-view>
+              <img-view :imageList="resDetailObj.mainPictures"></img-view>
               <!-- 统计数量 -->
               <ul class="goods-sales">
                 <li>
