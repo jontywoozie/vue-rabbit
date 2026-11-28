@@ -2,6 +2,7 @@
   import { getDetailAPI } from '@/api/detail';
   import { onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
+  import imgView from '@/components/imgView/index.vue'
   import GoodsHot from './components/GoodsHot.vue';
   const route = useRoute()
   const resDetailObj = ref({})
@@ -36,7 +37,7 @@
           <div class="goods-info">
             <div class="media" v-if="resDetailObj.salesCount">
               <!-- 图片预览区 -->
-
+              <img-view></img-view>
               <!-- 统计数量 -->
               <ul class="goods-sales">
                 <li>
